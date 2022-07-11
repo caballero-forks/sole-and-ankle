@@ -58,7 +58,6 @@ const Link = styled.a`
 `;
 
 const Wrapper = styled.article`
-  
 `;
 
 const ImageWrapper = styled.div`
