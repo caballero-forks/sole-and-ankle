@@ -35,6 +35,7 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
+          <Flag>{variant}</Flag>
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
@@ -44,6 +45,7 @@ const ShoeCard = ({
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          <SalePrice>{formatPrice(salePrice)}</SalePrice>
         </Row>
       </Wrapper>
     </Link>
@@ -58,11 +60,23 @@ const Link = styled.a`
 `;
 
 const Wrapper = styled.article`
+  //position: relative;
 `;
+
+const Flag = styled.div`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  background-color: red; 
+  padding-top: 7px; 
+  padding-bottom: 9px;
+  padding-left: 10px; 
+  padding-right: 11px; 
+  border-radius: 2px; 
+`
 
 const ImageWrapper = styled.div`
   position: relative;
-  
 `;
 
 const Image = styled.img`
@@ -71,6 +85,8 @@ const Image = styled.img`
 `;
 
 const Row = styled.div`
+  display: flex; 
+  justify-content: space-between;
   font-size: 1rem;
 `;
 
