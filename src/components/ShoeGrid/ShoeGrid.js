@@ -19,6 +19,8 @@ const Wrapper = styled.div`
   display: flex; 
   gap: 36px;
   flex-flow: row wrap;
+  flex: 1 0 340px;
+  margin-bottom: 28px;
 `;
 
 export default ShoeGrid;
