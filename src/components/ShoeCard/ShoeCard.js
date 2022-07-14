@@ -5,6 +5,8 @@ import { COLORS, WEIGHTS } from '../../constants';
 import { formatPrice, pluralize, isNewShoe } from '../../utils';
 import Spacer from '../Spacer';
 
+
+
 const ShoeCard = ({
   slug,
   name,
@@ -30,22 +32,58 @@ const ShoeCard = ({
     : isNewShoe(releaseDate)
       ? 'new-release'
       : 'default'
-
+  
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
-          <Flag>{variant}</Flag>
+         
+          { variant === "on-sale" 
+            ? <Flag style={{'--backgroundColor': `${COLORS.primary}`}}>Sale</Flag>
+            : undefined
+          }
+          { variant === "new-release" 
+            ? <Flag style={{'--backgroundColor': `${COLORS.secondary}`}}>Just released!</Flag>
+            : undefined
+          }
+          {/* <Flag
+            style={{
+              '--backgroundColor':
+                variant === 'on-sale'
+                  ? COLORS.primary
+                  : undefined
+                
+            }}
+          >
+            {variant === 'on-sale' ? "Sale" : undefined }
+            {variant === 'new-release' ? "Just Released!" : undefined }
+          </Flag> */}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price 
+            style={{
+              '--color': 
+                variant === 'on-sale' 
+                  ? COLORS.gray[700]
+                  : undefined,
+              '--textDecoration': 
+              variant === 'on-sale' 
+                ? "line-through"
+                : undefined
+          }}
+          >
+            {formatPrice(price)}
+          </Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
-          <SalePrice>{formatPrice(salePrice)}</SalePrice>
+          { variant === "on-sale" 
+            ? <SalePrice>{formatPrice(salePrice)}</SalePrice>
+            : undefined
+          }
         </Row>
       </Wrapper>
     </Link>
@@ -60,19 +98,21 @@ const Link = styled.a`
 `;
 
 const Wrapper = styled.article`
-  //position: relative;
+  
 `;
 
 const Flag = styled.div`
   position: absolute;
   top: 12px;
   right: -4px;
-  background-color: red; 
   padding-top: 7px; 
   padding-bottom: 9px;
   padding-left: 10px; 
   padding-right: 11px; 
   border-radius: 2px; 
+  font-weight: ${WEIGHTS.bold};
+  color: ${COLORS.white}; 
+  background-color: var(--backgroundColor);
 `
 
 const ImageWrapper = styled.div`
@@ -95,7 +135,10 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  color: var(--color);
+  text-decoration: var(--textDecoration);
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
