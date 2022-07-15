@@ -46,18 +46,6 @@ const ShoeCard = ({
             ? <Flag style={{'--backgroundColor': `${COLORS.secondary}`}}>Just released!</Flag>
             : undefined
           }
-          {/* <Flag
-            style={{
-              '--backgroundColor':
-                variant === 'on-sale'
-                  ? COLORS.primary
-                  : undefined
-                
-            }}
-          >
-            {variant === 'on-sale' ? "Sale" : undefined }
-            {variant === 'new-release' ? "Just Released!" : undefined }
-          </Flag> */}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
