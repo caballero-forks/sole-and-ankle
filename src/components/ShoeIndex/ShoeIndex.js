@@ -62,7 +62,6 @@ const Header = styled.header`
   align-items: baseline;
   justify-content: space-between;
   gap: 32px; 
-
 `;
 
 const Title = styled.h2`
