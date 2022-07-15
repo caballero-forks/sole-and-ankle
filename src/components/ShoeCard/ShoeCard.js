@@ -37,31 +37,27 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
-         
-          { variant === "on-sale" 
-            ? <Flag style={{'--backgroundColor': `${COLORS.primary}`}}>Sale</Flag>
-            : undefined
-          }
-          { variant === "new-release" 
-            ? <Flag style={{'--backgroundColor': `${COLORS.secondary}`}}>Just released!</Flag>
-            : undefined
-          }
+          { variant === "on-sale" && <SaleFlag>Sale</SaleFlag> }
+          { variant === "new-release" && <NewFlag>Just released!</NewFlag>}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
           <Price 
-            style={{
+            style={{ 
               '--color': 
-                variant === 'on-sale' 
-                  ? COLORS.gray[700]
-                  : undefined,
+                variant === 'on-sale' && COLORS.gray[700],
               '--textDecoration': 
-              variant === 'on-sale' 
-                ? "line-through"
-                : undefined
-          }}
+                variant === 'on-sale' && "line-through"
+            }}
+            // other option with ternary operator, same result 
+            // style={{ 
+            //   '--color': 
+            //     variant === 'on-sale' ? COLORS.gray[700] : undefined,
+            //   '--textDecoration': 
+            //     variant === 'on-sale' ? "line-through" : undefined
+            // }}
           >
             {formatPrice(price)}
           </Price>
@@ -89,16 +85,23 @@ const Wrapper = styled.article`
 
 const Flag = styled.div`
   position: absolute;
-  top: 12px;
+  top: 16px;
   right: -4px;
-  padding-top: 7px; 
-  padding-bottom: 9px;
-  padding-left: 10px; 
-  padding-right: 11px; 
+  padding-top: 8px; 
+  padding-bottom: 8px;
+  padding-left: 12px; 
+  padding-right: 12px; 
   border-radius: 2px; 
   font-weight: ${WEIGHTS.bold};
   color: ${COLORS.white}; 
-  background-color: var(--backgroundColor);
+`
+
+const SaleFlag = styled(Flag)`
+  background-color: ${COLORS.primary};
+`
+
+const NewFlag = styled(Flag)`
+  background-color: ${COLORS.secondary};
 `
 
 const ImageWrapper = styled.div`
